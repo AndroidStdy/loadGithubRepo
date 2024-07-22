@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import fastcampus.part2.loadgithubrepo.model.Repo
+import fastcampus.part2.loadgithubrepo.model.UserDto
 import fastcampus.part2.loadgithubrepo.network.GithubService
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,12 +32,23 @@ class MainActivity : AppCompatActivity() {
         githubService.listRepos("square").enqueue(object: Callback<List<Repo>>{
             override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
                 //성공할 경우
-                Log.e("MainActivity", response.body().toString())
+                Log.e("MainActivity", "List Repo : ${response.body().toString()}")
             }
 
             override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
                 //실패할 경우
 
+            }
+
+        })
+        githubService.searchUsers("squar").enqueue(object: Callback<UserDto>{
+            override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
+                //성공할 경우
+                Log.e("MainActivity", "Search User : ${response.body().toString()}")
+            }
+
+            override fun onFailure(call: Call<UserDto>, t: Throwable) {
+                //실패할 경우
             }
 
         })
