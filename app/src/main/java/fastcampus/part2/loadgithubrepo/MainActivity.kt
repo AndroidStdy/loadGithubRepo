@@ -57,7 +57,12 @@ class MainActivity : AppCompatActivity() {
 //            }
 //
 //        })
-
+        // 유저 선택 시, 해당 repo로 이동
+        userAdapter = UserAdapter{
+            val intent = Intent(this@MainActivity, RepoActivity:: class.java)
+            intent.putExtra("username", it.username)
+            startActivity(intent)
+        }
 
         binding.userRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)

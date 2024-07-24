@@ -8,13 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import fastcampus.part2.loadgithubrepo.databinding.ItemUserBinding
 import fastcampus.part2.loadgithubrepo.model.User
 
-class UserAdapter : ListAdapter<User, UserAdapter.ViewHolder>(diffUtil) {
+class UserAdapter(val onclick: (User) -> Unit) : ListAdapter<User, UserAdapter.ViewHolder>(diffUtil) {
 
     inner class ViewHolder(private val viewBinding: ItemUserBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
 
         fun bind(item: User) {
             viewBinding.tvUsername.text = item.username
+            viewBinding.root.setOnClickListener{
+                onclick(item)
+            }
         }
     }
     //Recyclerview에서 뷰 홀더가 없거나 부족할 때, 생성하는 함수
