@@ -31,6 +31,9 @@ class RepoActivity : AppCompatActivity() {
         binding = ActivityRepoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val username = intent.getStringExtra("username") ?: return
+
+        binding.tvUsername.text = username
 
         repoAdapter = RepoAdapter()
 
@@ -38,13 +41,13 @@ class RepoActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@RepoActivity)
             adapter = repoAdapter
         }
-        listRepo()
+        listRepo(username)
     }
 
-    private fun listRepo() {
+    private fun listRepo(username: String) {
         val githubService = retrofit.create(GithubService::class.java)
         // api 호출
-        githubService.listRepos("square").enqueue(object : Callback<List<Repo>> {
+        githubService.listRepos(username).enqueue(object : Callback<List<Repo>> {
             override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
                 //성공할 경우
                 Log.e("MainActivity", "List Repo : ${response.body().toString()}")
