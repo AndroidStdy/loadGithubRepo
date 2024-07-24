@@ -44,22 +44,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-//        // api 호출
-//        githubService.listRepos("square").enqueue(object : Callback<List<Repo>> {
-//            override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
-//                //성공할 경우
-//                Log.e("MainActivity", "List Repo : ${response.body().toString()}")
-//            }
-//
-//            override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-//                //실패할 경우
-//
-//            }
-//
-//        })
+
         // 유저 선택 시, 해당 repo로 이동
-        userAdapter = UserAdapter{
-            val intent = Intent(this@MainActivity, RepoActivity:: class.java)
+        userAdapter = UserAdapter {
+            val intent = Intent(this@MainActivity, RepoActivity::class.java)
             intent.putExtra("username", it.username)
             startActivity(intent)
         }
