@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import fastcampus.part2.loadgithubrepo.adapter.UserAdapter
 import fastcampus.part2.loadgithubrepo.databinding.ActivityMainBinding
 import fastcampus.part2.loadgithubrepo.model.Repo
 import fastcampus.part2.loadgithubrepo.model.UserDto
@@ -48,10 +49,20 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        val userAdapter = UserAdapter()
+
+        binding.userRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = userAdapter
+        }
+
         githubService.searchUsers("squar").enqueue(object : Callback<UserDto> {
             override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
                 //성공할 경우
                 Log.e("MainActivity", "Search User : ${response.body().toString()}")
+
+                userAdapter.submitList(response.body()?.items)
             }
 
             override fun onFailure(call: Call<UserDto>, t: Throwable) {
@@ -59,11 +70,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
-        binding.userRecyclerView.apply {
-            layoutManager = LinearLayoutManager(context)
-            adapter = 
-        }
 
 
     }
