@@ -1,6 +1,8 @@
 package fastcampus.part2.loadgithubrepo
 
 import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
@@ -39,7 +41,10 @@ class RepoActivity : AppCompatActivity() {
 
         binding.tvUsername.text = username
 
-        repoAdapter = RepoAdapter()
+        repoAdapter = RepoAdapter{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(it.htmlUrl))
+            startActivity(intent)
+        }
         val linearLayoutManager = LinearLayoutManager(this@RepoActivity)
 
         binding.repoRecyclerView.apply {
