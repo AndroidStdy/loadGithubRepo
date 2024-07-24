@@ -1,5 +1,6 @@
 package fastcampus.part2.loadgithubrepo
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 //
 //        })
 
-        userAdapter = UserAdapter()
 
         binding.userRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
