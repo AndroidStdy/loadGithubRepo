@@ -11,11 +11,11 @@ import retrofit2.http.Query
 interface GithubService {
     //깃허브 토큰 추가
     @Headers("Authorization: Bearer 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")
-
     @GET("users/{username}/repos")
-    fun listRepos(@Path("username") username: String): Call<List<Repo>>
+    fun listRepos(@Path("username") username: String, @Query("page")page:Int): Call<List<Repo>>
 
     // search users api
+    @Headers("Authorization: Bearer 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")
     @GET("search/users")
     fun searchUsers(@Query("q") query: String): Call<UserDto>
 
